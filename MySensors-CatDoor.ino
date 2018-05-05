@@ -89,9 +89,6 @@ void setup() {
 
   // Why Not?
   Serial.println( SKETCH_NAME );
-
-  // Set the heartbeat timer to send the current state at the set interval
-  heartbeat.setInterval(HEARTBEAT_INTERVAL, sendCurrentState);
   
 } //End setup
 
@@ -106,7 +103,8 @@ void loop() {
     sendCurrentState();
   }
 
-  heartbeat.run();
+  // Sleep for a while to save energy
+  sleep(UPDATE_INTERVAL); 
   
 } //End loop
 
