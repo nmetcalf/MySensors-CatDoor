@@ -26,7 +26,7 @@
 #define RELAY_ON 0            // GPIO value to write to turn on attached relay
 #define RELAY_OFF 1           // GPIO value to write to turn off attached relay
 
-#define HEARTBEAT_INTERVAL 300000 //Number of miliseconds before the next heartbeat
+#define HEARTBEAT_INTERVAL 600000 //Number of miliseconds before the next heartbeat
 
 // State int's
 #define CLOSED 0
@@ -89,6 +89,9 @@ void setup() {
 
   // Why Not?
   Serial.println( SKETCH_NAME );
+
+  // Set the heartbeat timer to send the current state at the set interval
+  heartbeat.setInterval(HEARTBEAT_INTERVAL, sendCurrentState);
   
 } //End setup
 
@@ -105,6 +108,7 @@ void loop() {
 
   // Sleep for a while to save energy
   sleep(UPDATE_INTERVAL); 
+  heartbeat.run();
   
 } //End loop
 
